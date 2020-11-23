@@ -35,11 +35,14 @@ HINT: Check the console in the browser developer tools for errors. -->
 
         handleMoodOptions = () => {
           let randomIndex = Math.floor(Math.random() * this.state.moods.length )
-          this.setState({ currentMood: moods[randomIndex] })
+          //moods (where it said mood[randomIndex]) was undefined so I changed it to this.state.moods but I'm not sure why it worked
+          this.setState({ currentMood: this.state.moods[randomIndex] })
         }
 
         render(){
           return(
+              //the third error was that we needed to wrap the whole return in a div or something like it bc the return can only render ONE item
+              <>
               <h1>Welcome to the Mood Meter App</h1>
 
               <h3>Mood Options:</h3>
@@ -47,10 +50,11 @@ HINT: Check the console in the browser developer tools for errors. -->
               <div style={{ fontSize: "40px", height: "50px"}}>
                 { this.state.currentMood }
               </div>
-
-              <button onClick={ handleMoodOptions }>
+              // the button onClick needed to be changed to this.handleMoodOptions so that it knew it needed to access the function above
+              <button onClick={ this.handleMoodOptions }>
                 Click Here For Next Mood option
               </button>
+              </>
 
           )
         }
